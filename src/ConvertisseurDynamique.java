@@ -1,53 +1,38 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+// java -cp src ConvertisseurDynamique
 
-/**
- * Mini-Projet IHM - Convertisseur Dynamique
- * Université Cadi Ayyad - Licence SIR 2025-2026
- *
- * Catégories disponibles :
- *   1. Température  (Celsius, Fahrenheit, Kelvin)
- *   2. Distance     (Mètre, Kilomètre, Mille)
- */
+//   Catégories disponibles :
+//     1. Température  (Celsius, Fahrenheit, Kelvin)
+//     2. Distance     (Mètre, Kilomètre, Mille)
+
 public class ConvertisseurDynamique extends JFrame {
 
-    // =========================================================================
-    // COMPOSANTS DE L'INTERFACE
-    // =========================================================================
-
-    private JComboBox<String> comboDepart;   // liste déroulante unité de départ
-    private JComboBox<String> comboArrivee;  // liste déroulante unité d'arrivée
-    private JTextField champValeur;          // champ de saisie de la valeur
-    private JLabel labelResultat;            // label pour afficher le résultat
-    private JLabel labelCategorie;           // affiche la catégorie active
-
-    // =========================================================================
-    // DONNÉES : tableaux des unités pour chaque catégorie
-    // =========================================================================
+    private JComboBox<String> comboDepart;   // unité de départ
+    private JComboBox<String> comboArrivee;  // unité d'arrivée
+    private JTextField champValeur;          // saisie de la valeur
+    private JLabel labelResultat;            
+    private JLabel labelCategorie;        
 
     private String[] unitesTemperature = { "Celsius", "Fahrenheit", "Kelvin" };
     private String[] unitesDistance    = { "Mètre", "Kilomètre", "Mille" };
 
-    // La catégorie active au démarrage
     private String categorieActive = "Température";
 
-    // =========================================================================
-    // CONSTRUCTEUR
-    // =========================================================================
     public ConvertisseurDynamique() {
 
-        // --- Configuration de la fenêtre ---
+        // la fenêtre
         setTitle("Convertisseur Multi-Catégories");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // ── 1. BARRE DE MENU ──────────────────────────────────────────────────
+        //BARRE DE MENU
         JMenuBar menuBar = new JMenuBar();
         JMenu menuCategories = new JMenu("Catégories");
 
-        // --- Item : Température ---
+        //Température ---
         JMenuItem itemTemperature = new JMenuItem("Température");
         itemTemperature.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -56,7 +41,7 @@ public class ConvertisseurDynamique extends JFrame {
             }
         });
 
-        // --- Item : Distance ---
+        //Distance
         JMenuItem itemDistance = new JMenuItem("Distance");
         itemDistance.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -70,13 +55,13 @@ public class ConvertisseurDynamique extends JFrame {
         menuBar.add(menuCategories);
         setJMenuBar(menuBar);
 
-        // ── 2. PANNEAU PRINCIPAL ──────────────────────────────────────────────
+        //PANNEAU PRINCIPAL
         JPanel panneauPrincipal = new JPanel();
         panneauPrincipal.setLayout(new BoxLayout(panneauPrincipal, BoxLayout.Y_AXIS));
         panneauPrincipal.setBorder(BorderFactory.createEmptyBorder(15, 25, 15, 25));
         panneauPrincipal.setBackground(new Color(245, 247, 250));
 
-        // ── 3. LABEL CATÉGORIE ACTIVE ─────────────────────────────────────────
+        //LABEL CATÉGORIE ACTIVE
         labelCategorie = new JLabel("Catégorie : Température");
         labelCategorie.setFont(new Font("Arial", Font.BOLD, 13));
         labelCategorie.setForeground(new Color(60, 60, 60));
@@ -84,7 +69,7 @@ public class ConvertisseurDynamique extends JFrame {
         panneauPrincipal.add(labelCategorie);
         panneauPrincipal.add(Box.createVerticalStrut(12));
 
-        // ── 4. LIGNE DE SAISIE ────────────────────────────────────────────────
+        //LIGNE DE SAISIE
         JPanel ligneValeur = new JPanel(new FlowLayout(FlowLayout.CENTER));
         ligneValeur.setBackground(new Color(245, 247, 250));
         ligneValeur.add(new JLabel("Valeur : "));
@@ -96,7 +81,7 @@ public class ConvertisseurDynamique extends JFrame {
         panneauPrincipal.add(ligneValeur);
         panneauPrincipal.add(Box.createVerticalStrut(8));
 
-        // ── 5. LIGNE DES UNITÉS (De / Vers) ──────────────────────────────────
+        //LIGNE DES UNITÉS (De / Vers)
         JPanel ligneUnites = new JPanel(new FlowLayout(FlowLayout.CENTER));
         ligneUnites.setBackground(new Color(245, 247, 250));
 
@@ -117,7 +102,7 @@ public class ConvertisseurDynamique extends JFrame {
         panneauPrincipal.add(ligneUnites);
         panneauPrincipal.add(Box.createVerticalStrut(8));
 
-        // ── 6. LIGNE DES BOUTONS ──────────────────────────────────────────────
+        //LIGNE DES BOUTONS
         JPanel lignesBoutons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         lignesBoutons.setBackground(new Color(245, 247, 250));
 
@@ -148,7 +133,7 @@ public class ConvertisseurDynamique extends JFrame {
         panneauPrincipal.add(lignesBoutons);
         panneauPrincipal.add(Box.createVerticalStrut(15));
 
-        // ── 7. LABEL DE RÉSULTAT ──────────────────────────────────────────────
+        //LABEL DE RÉSULTAT
         labelResultat = new JLabel(" ");
         labelResultat.setFont(new Font("Arial", Font.BOLD, 15));
         labelResultat.setForeground(new Color(0, 130, 70));
@@ -159,14 +144,11 @@ public class ConvertisseurDynamique extends JFrame {
         setVisible(true);
     }
 
-    // =========================================================================
-    // MÉTHODE : Mettre à jour les listes déroulantes
-    // =========================================================================
-    /**
-     * Remplace le contenu des deux JComboBox avec les nouvelles unités.
-     * setModel() + DefaultComboBoxModel : on ne recrée pas les composants,
-     * on change juste leurs données.
-     */
+    
+    //   Remplace le contenu des deux JComboBox avec les nouvelles unités
+    //   setModel() + DefaultComboBoxModel : on ne recrée pas les composants
+    //   on change juste leurs données
+     
     private void mettreAJourUnites(String[] unites) {
         comboDepart.setModel(new DefaultComboBoxModel<String>(unites));
         comboArrivee.setModel(new DefaultComboBoxModel<String>(unites));
@@ -175,30 +157,18 @@ public class ConvertisseurDynamique extends JFrame {
         champValeur.setText("");
     }
 
-    // =========================================================================
-    // MÉTHODE : Inverser les deux unités sélectionnées
-    // =========================================================================
     private void inverserUnites() {
         int indexDepart  = comboDepart.getSelectedIndex();
         int indexArrivee = comboArrivee.getSelectedIndex();
         comboDepart.setSelectedIndex(indexArrivee);
         comboArrivee.setSelectedIndex(indexDepart);
     }
-
-    // =========================================================================
-    // MÉTHODE : Lancer la conversion
-    // =========================================================================
-    /**
-     * 1. Vérifie que le champ n'est pas vide
-     * 2. Vérifie que la saisie est un nombre valide
-     * 3. Appelle la bonne méthode selon la catégorie active
-     * 4. Affiche le résultat
-     */
+    //run
     private void lancerConversion() {
 
         String texte = champValeur.getText().trim();
 
-        // Vérification 1 : champ vide
+        // verifie champ vide
         if (texte.isEmpty()) {
             JOptionPane.showMessageDialog(
                     this,
@@ -209,7 +179,7 @@ public class ConvertisseurDynamique extends JFrame {
             return;
         }
 
-        // Vérification 2 : est-ce un nombre ?
+        // verifie est ce que un nombre ?
         double valeur;
         try {
             valeur = Double.parseDouble(texte);
@@ -239,21 +209,18 @@ public class ConvertisseurDynamique extends JFrame {
         );
     }
 
-    // =========================================================================
-    // MÉTHODE : Conversion de Température  (Pivot = Celsius)
-    // =========================================================================
-    /**
-     * Étape 1 : unité de départ → Celsius
-     * Étape 2 : Celsius → unité d'arrivée
-     *
-     * Fahrenheit → Celsius : (F - 32) * 5/9
-     * Kelvin     → Celsius : K - 273.15
-     * Celsius → Fahrenheit : (C * 9/5) + 32
-     * Celsius → Kelvin     : C + 273.15
+    /*
+      Étape 1 : unité de départ → Celsius
+      Étape 2 : Celsius → unité d'arrivée
+     
+      Fahrenheit → Celsius : (F - 32) * 5/9
+      Kelvin     → Celsius : K - 273.15
+      Celsius → Fahrenheit : (C * 9/5) + 32
+      Celsius → Kelvin     : C + 273.15
      */
     private double convertirTemperature(double valeur, String de, String vers) {
 
-        // Étape 1 : convertir vers Celsius (pivot)
+        //vers Celsius (pivot)
         double celsius;
         if (de.equals("Celsius")) {
             celsius = valeur;
@@ -263,7 +230,7 @@ public class ConvertisseurDynamique extends JFrame {
             celsius = valeur - 273.15;
         }
 
-        // Étape 2 : convertir depuis Celsius
+        // depuis Celsius
         double resultat;
         if (vers.equals("Celsius")) {
             resultat = celsius;
@@ -276,21 +243,18 @@ public class ConvertisseurDynamique extends JFrame {
         return resultat;
     }
 
-    // =========================================================================
-    // MÉTHODE : Conversion de Distance  (Pivot = Mètre)
-    // =========================================================================
-    /**
-     * Étape 1 : unité de départ → Mètre
-     * Étape 2 : Mètre → unité d'arrivée
-     *
-     * Kilomètre → Mètre : km * 1000
-     * Mille     → Mètre : mile * 1609.34
-     * Mètre → Kilomètre : m / 1000
-     * Mètre → Mille     : m / 1609.34
+    /*
+     etape 1 : unité de départ → Mètre
+     etape 2 : Mètre → unité d'arrivée
+     
+      Kilomètre → Mètre : km * 1000
+      Mille     → Mètre : mile * 1609.34
+      Mètre → Kilomètre : m / 1000
+      Mètre → Mille     : m / 1609.34
      */
     private double convertirDistance(double valeur, String de, String vers) {
 
-        // Étape 1 : convertir vers Mètre (pivot)
+        //vers Mètre (pivot)
         double metre;
         if (de.equals("Mètre")) {
             metre = valeur;
@@ -300,7 +264,7 @@ public class ConvertisseurDynamique extends JFrame {
             metre = valeur * 1609.34;
         }
 
-        // Étape 2 : convertir depuis Mètre
+        // depuis Mètre
         double resultat;
         if (vers.equals("Mètre")) {
             resultat = metre;
@@ -313,9 +277,6 @@ public class ConvertisseurDynamique extends JFrame {
         return resultat;
     }
 
-    // =========================================================================
-    // POINT D'ENTRÉE DU PROGRAMME
-    // =========================================================================
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
