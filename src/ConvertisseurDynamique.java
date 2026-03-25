@@ -4,14 +4,14 @@ import java.awt.event.*;
 // java -cp src ConvertisseurDynamique
 
 //   Catégories disponibles :
-//     Température  (Celsius, Fahrenheit, Kelvin)
-//     Distance     (Mètre, Kilomètre, Mille)
+//     Température (Celsius, Fahrenheit, Kelvin)
+//     Distance (Mètre, Kilomètre, Mille)
 
 public class ConvertisseurDynamique extends JFrame {
 
     private JComboBox<String> comboDepart;   // unité de départ
     private JComboBox<String> comboArrivee;  // unité d'arrivée
-    private JTextField champValeur;          // saisie de la valeur
+    private JTextField champValeur;          // saisie valeur
     private JLabel labelResultat;            
     private JLabel labelCategorie;        
 
