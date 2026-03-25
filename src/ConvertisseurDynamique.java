@@ -4,8 +4,8 @@ import java.awt.event.*;
 // java -cp src ConvertisseurDynamique
 
 //   Catégories disponibles :
-//     1. Température  (Celsius, Fahrenheit, Kelvin)
-//     2. Distance     (Mètre, Kilomètre, Mille)
+//     Température  (Celsius, Fahrenheit, Kelvin)
+//     Distance     (Mètre, Kilomètre, Mille)
 
 public class ConvertisseurDynamique extends JFrame {
 
