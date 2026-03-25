@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
+import static java.awt.Color.*;
 // java -cp src ConvertisseurDynamique
 
 //   Catégories disponibles :
@@ -59,19 +61,19 @@ public class ConvertisseurDynamique extends JFrame {
         JPanel panneauPrincipal = new JPanel();
         panneauPrincipal.setLayout(new BoxLayout(panneauPrincipal, BoxLayout.Y_AXIS));
         panneauPrincipal.setBorder(BorderFactory.createEmptyBorder(15, 25, 15, 25));
-        panneauPrincipal.setBackground(new Color(245, 247, 250));
+        panneauPrincipal.setBackground(white);
 
         //LABEL CATÉGORIE ACTIVE
         labelCategorie = new JLabel("Catégorie : Température");
         labelCategorie.setFont(new Font("Arial", Font.BOLD, 13));
-        labelCategorie.setForeground(new Color(60, 60, 60));
+        labelCategorie.setForeground(red);
         labelCategorie.setAlignmentX(Component.CENTER_ALIGNMENT);
         panneauPrincipal.add(labelCategorie);
         panneauPrincipal.add(Box.createVerticalStrut(12));
 
         //LIGNE DE SAISIE
         JPanel ligneValeur = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        ligneValeur.setBackground(new Color(245, 247, 250));
+        ligneValeur.setBackground(white);
         ligneValeur.add(new JLabel("Valeur : "));
 
         champValeur = new JTextField(12);
@@ -83,7 +85,7 @@ public class ConvertisseurDynamique extends JFrame {
 
         //LIGNE DES UNITÉS (De / Vers)
         JPanel ligneUnites = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        ligneUnites.setBackground(new Color(245, 247, 250));
+        ligneUnites.setBackground(white);
 
         ligneUnites.add(new JLabel("De : "));
 
@@ -104,12 +106,12 @@ public class ConvertisseurDynamique extends JFrame {
 
         //LIGNE DES BOUTONS
         JPanel lignesBoutons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
-        lignesBoutons.setBackground(new Color(245, 247, 250));
+        lignesBoutons.setBackground(white);
 
         // Bouton Convertir
         JButton boutonConvertir = new JButton("Convertir");
         boutonConvertir.setFont(new Font("Arial", Font.BOLD, 12));
-        boutonConvertir.setBackground(new Color(0, 102, 204));
+        boutonConvertir.setBackground(blue);
         boutonConvertir.setForeground(Color.WHITE);
         boutonConvertir.setFocusPainted(false);
         boutonConvertir.addActionListener(new ActionListener() {
@@ -136,7 +138,7 @@ public class ConvertisseurDynamique extends JFrame {
         //LABEL DE RÉSULTAT
         labelResultat = new JLabel(" ");
         labelResultat.setFont(new Font("Arial", Font.BOLD, 15));
-        labelResultat.setForeground(new Color(0, 130, 70));
+        labelResultat.setForeground(GREEN);
         labelResultat.setAlignmentX(Component.CENTER_ALIGNMENT);
         panneauPrincipal.add(labelResultat);
 
